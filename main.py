@@ -1,6 +1,5 @@
 import argparse
 import time
-
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -39,7 +38,7 @@ def get_head_pose(landmarks, frame_w, frame_h):
         [0, focal_length, center[1]],
         [0, 0, 1]
     ], dtype=np.float64)
-    dist_coeffs = np.zeros((4, 1))  # assume no lens distortion
+    dist_coeffs = np.zeros((4, 1))  
 
     success, rotation_vec, _ = cv2.solvePnP(
         MODEL_POINTS, image_points, camera_matrix, dist_coeffs,
@@ -78,7 +77,7 @@ class VideoPlayer:
             return
         frame, val = self.player.get_frame()
         if val == 'eof':
-            # loop the video from the start
+            # loops the video from the start
             self.player.seek(0, relative=False)
             return
         if frame is None:
